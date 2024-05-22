@@ -28,13 +28,8 @@ public class Main {
         System.out.println(labas("labas"));
         System.out.println("--------------2s--------------");
         generateRndStr(10);
-        System.out.println(generateRndStr(10));
+        printWithBrackets(generateRndStr(10));
         System.out.println("--------------3s--------------");
-        int[] numbers2 = {44, 55, 66, 77};
-        int divisor = findDivisor(numbers2);
-        System.out.println("Divisor: " + divisor);  // Output: Divisor: 11
-
-
 
     }
 
@@ -134,22 +129,47 @@ public class Main {
         return text;
     }
 
-    public static String fixStr(int length) {
-        for
-        return;
-    }
-
-
-    public static int findDivisor(int[] numbers) {
-        int result = numbers[0];
-        for (int num : numbers) {
-            while (num != 0) {
-                int temp = result % num;
-                result = num;
-                num = temp;
+    public static void printWithBrackets(String text) {
+        StringBuilder result = new StringBuilder();
+        boolean isInNumberGroup = false;
+        for (char character : text.toCharArray()) {
+            if (Character.isDigit(character)) {
+                if (!isInNumberGroup) {
+                    result.append("[");
+                    isInNumberGroup = true;
+                }
+                result.append(character);
+            } else {
+                if (isInNumberGroup) {
+                    result.append("]");
+                    isInNumberGroup = false;
+                }
+                result.append(character);
             }
         }
-        return result;
+        if (isInNumberGroup) {
+            result.append("]");
+        }
+        System.out.println(result.toString());
+    }
+
+    public static int countDivisors(int number) {
+        if (number <= 1) {
+            return 0; // Handle non-positive input
+        }
+
+        int count = 0;
+
+        for (int i = 2; i <= Math.sqrt(number); i++) {
+            if (number % i == 0) {
+
+                count++;
+                if (i != number / i) {
+                    count++;
+                }
+            }
+        }
+        return count;
     }
 }
 

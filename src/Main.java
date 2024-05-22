@@ -124,45 +124,42 @@ public class Main {
         String symbols = "ABCDEFGHIJKLMNOPQRSTUVWXYZ12345678901234567890";
         String text = "";
         for (int i = 0; i < length; i++) {
-            text += symbols.charAt((int) (Math.random()*symbols.length()));
+            text += symbols.charAt((int) (Math.random() * symbols.length()));
         }
         return text;
     }
 
     public static void printWithBrackets(String text) {
-        StringBuilder result = new StringBuilder();
-        boolean isInNumberGroup = false;
+        StringBuilder rezultatas = new StringBuilder();
+        boolean Yraskaicius = false;
         for (char character : text.toCharArray()) {
             if (Character.isDigit(character)) {
-                if (!isInNumberGroup) {
-                    result.append("[");
-                    isInNumberGroup = true;
+                if (!Yraskaicius) {
+                    rezultatas.append("[");
+                    Yraskaicius = true;
                 }
-                result.append(character);
+                rezultatas.append(character);
             } else {
-                if (isInNumberGroup) {
-                    result.append("]");
-                    isInNumberGroup = false;
+                if (Yraskaicius) {
+                    rezultatas.append("]");
+                    Yraskaicius = false;
                 }
-                result.append(character);
+                rezultatas.append(character);
             }
         }
-        if (isInNumberGroup) {
-            result.append("]");
+        if (Yraskaicius) {
+            rezultatas.append("]");
         }
-        System.out.println(result.toString());
+        System.out.println(rezultatas.toString());
     }
 
     public static int countDivisors(int number) {
         if (number <= 1) {
             return 0; // Handle non-positive input
         }
-
         int count = 0;
-
         for (int i = 2; i <= Math.sqrt(number); i++) {
             if (number % i == 0) {
-
                 count++;
                 if (i != number / i) {
                     count++;
